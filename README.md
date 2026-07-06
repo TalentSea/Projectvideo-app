@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
 # Getting Started
@@ -100,3 +101,6 @@ To learn more about React Native, take a look at the following resources:
 the app preview will be in 
 
 https://github.com/patters0n58/streamr/android/app/src/mai/res/appPreview.png
+=======
+# projectvideo-frontend
+>>>>>>> ddcaf0e9e75590a67581141a7045d4d4d888676e
