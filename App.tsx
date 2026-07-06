@@ -10,6 +10,8 @@ import {
   StyleSheet,
   Text,
   View,
+  requireNativeComponent,
+  ViewStyle,
 } from 'react-native';
 
 type NativeVideoPlayerProps = {
