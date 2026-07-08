@@ -5,12 +5,12 @@ import {
   Image,
   Modal,
   Pressable,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import NativeVideoPlayer from './NativeVideoPlayer';
 
 
@@ -147,16 +147,6 @@ export default function App() {
         onRequestClose={() => setPlayingVideo(null)}>
         <View style={styles.modalBackdrop}>
           <View style={styles.playerCard}>
-            <View style={styles.playerHeader}>
-              <Text numberOfLines={1} style={styles.playerTitle}>
-                {playingVideo?.title}
-              </Text>
-
-              <Pressable onPress={() => setPlayingVideo(null)}>
-                <Text style={styles.closeText}>Close</Text>
-              </Pressable>
-            </View>
-
             {playingVideo ? (
               <NativeVideoPlayer
                 uri={playingVideo.stream_url}
@@ -444,28 +434,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#101018',
     borderRadius: 16,
     overflow: 'hidden',
-    padding: 12,
-  },
-
-  playerHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-
-  playerTitle: {
-    color: '#FFFFFF',
-    fontSize: 14,
-    fontWeight: '900',
-    flex: 1,
-    marginRight: 12,
-  },
-
-  closeText: {
-    color: '#FF245E',
-    fontSize: 12,
-    fontWeight: '900',
   },
 
   videoPlayer: {

@@ -130,7 +130,11 @@ export default function NativeVideoPlayer({ uri, style, onClose }: VideoPlayerPr
         }}
       />
 
-      <Pressable style={styles.touchOverlay} onPress={() => setShowControls(prev => !prev)} />
+      {/* Unified tap overlay — always present, toggles controls */}
+      <Pressable
+        style={styles.touchOverlay}
+        onPress={() => setShowControls(prev => !prev)}
+      />
 
       {isBuffering && (
         <View style={styles.spinnerWrapper} pointerEvents="none">
@@ -139,8 +143,8 @@ export default function NativeVideoPlayer({ uri, style, onClose }: VideoPlayerPr
       )}
 
       {showControls && (
-        <View style={styles.controlsOverlay}>
-          {/* Header row with Title/Close button */}
+        <View style={styles.controlsOverlay} pointerEvents="box-none">
+          {/* Header row with Close button */}
           <View style={styles.header}>
             <View style={styles.flexShim} />
             {onClose && (
@@ -151,14 +155,14 @@ export default function NativeVideoPlayer({ uri, style, onClose }: VideoPlayerPr
           </View>
 
           {/* Large Center Play/Pause button */}
-          <View style={styles.centerControls}>
+          <View style={styles.centerControls} pointerEvents="box-none">
             <Pressable style={styles.playButton} onPress={togglePlayPause}>
               <Text style={styles.playIcon}>{paused ? '▶' : '❚❚'}</Text>
             </Pressable>
           </View>
 
           {/* Bottom control bar with slider and timers */}
-          <View style={styles.bottomControls}>
+          <View style={styles.bottomControls} pointerEvents="box-none">
             <Text style={styles.timeText}>{formatTime(currentTime)}</Text>
 
             <Pressable
@@ -167,7 +171,7 @@ export default function NativeVideoPlayer({ uri, style, onClose }: VideoPlayerPr
               onPress={handleProgressBarPress}
             >
               <View style={styles.progressBarBackground}>
-                <View style={[styles.progressBarFill, { width: `${progressPercent}%` }]} />
+                <View style={[styles.progressBarFill, { width: `${progressPercent}%` as any }]} />
               </View>
             </Pressable>
 
@@ -192,13 +196,13 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   touchOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     zIndex: 12,
     elevation: 12,
     backgroundColor: 'transparent',
   },
   spinnerWrapper: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.4)',
@@ -206,12 +210,12 @@ const styles = StyleSheet.create({
     elevation: 10,
   },
   controlsOverlay: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     backgroundColor: 'rgba(0, 0, 0, 0.45)',
     justifyContent: 'space-between',
     padding: 12,
-    zIndex: 15,
-    elevation: 15,
+    zIndex: 20,
+    elevation: 20,
   },
   header: {
     flexDirection: 'row',
@@ -284,7 +288,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   progressBarFill: {
-    height: '100%',
+    height: '100%' as any,
     backgroundColor: '#FF245E',
   },
 });
