@@ -97,15 +97,15 @@ export default function NativeVideoPlayer({ uri, style, onClose }: VideoPlayerPr
 
   const progressPercent = duration > 0 ? (currentTime / duration) * 100 : 0;
 
-  const httpUri = uri.replace('https://', 'http://');
 
+  const videoUri = uri;
   console.log('JS: NativeVideoPlayer Render state:', { showControls, paused, isBuffering, duration, currentTime });
 
   return (
     <View style={[styles.container, style]}>
       <RCTNativeVideoPlayer
         ref={playerRef}
-        source={{ uri: httpUri }}
+        source={{ uri: videoUri }}
         paused={paused}
         style={styles.player}
         onLoadStart={() => {
